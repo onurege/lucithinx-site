@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="meta.title">lucithinx — Çağrı operasyonunuzu yöneten AI</title>
+  <meta name="description" data-i18n-attr="content:meta.description"
+    content="lucithinx gelen ve giden çağrılarınızı AI ile karşılar, konuşmanın altındaki niyeti ve duyguyu okur, CRM ve destek kayıtlarınızı kendisi günceller. Kararı hep ekibiniz verir. Tek bir çağrı akışıyla başlayan pilotla deneyin." />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#FBFAF7" />
+
+  <!-- Canonical: replace with the real production domain before going live. -->
+  <link rel="canonical" href="https://lucithinx.com/" />
+  <link rel="alternate" hreflang="tr" href="https://lucithinx.com/" />
+  <link rel="alternate" hreflang="en" href="https://lucithinx.com/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://lucithinx.com/" />
+  
+  <meta name="robots" content="index,follow" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="lucithinx" />
+  <meta property="og:url" content="https://lucithinx.com/" />
+  <meta property="og:title" data-i18n-attr="content:meta.title" content="lucithinx — Çağrı operasyonunuzu yöneten AI" />
+  <meta property="og:description" data-i18n-attr="content:meta.description" content="lucithinx gelen ve giden çağrılarınızı AI ile karşılar, konuşmanın altındaki niyeti ve duyguyu okur, CRM ve destek kayıtlarınızı kendisi günceller. Kararı hep ekibiniz verir. Tek bir çağrı akışıyla başlayan pilotla deneyin." />
+  <meta property="og:image" content="https://lucithinx.com/assets/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" data-i18n-attr="content:meta.title" content="lucithinx — Çağrı operasyonunuzu yöneten AI" />
+  <meta name="twitter:description" data-i18n-attr="content:meta.description" content="lucithinx gelen ve giden çağrılarınızı AI ile karşılar, konuşmanın altındaki niyeti ve duyguyu okur, CRM ve destek kayıtlarınızı kendisi günceller. Kararı hep ekibiniz verir. Tek bir çağrı akışıyla başlayan pilotla deneyin." />
+  <meta name="twitter:image" content="https://lucithinx.com/assets/og-image.png" />
+
+  <!-- Favicon: real PNG file at root so Google Search reliably crawls/shows it -->
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+
+  <link rel="stylesheet" href="/styles.css" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "lucithinx",
+  "url": "https://lucithinx.com",
+  "logo": "https://lucithinx.com/assets/og-image.png",
+  "description": "lucithinx gelen ve giden çağrılarınızı AI ile karşılar, konuşmanın altındaki niyeti ve duyguyu okur, CRM ve destek kayıtlarınızı kendisi günceller. Kararı hep ekibiniz verir. Tek bir çağrı akışıyla başlayan pilotla deneyin."
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "lucithinx",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "lucithinx gelen ve giden çağrılarınızı AI ile karşılar, konuşmanın altındaki niyeti ve duyguyu okur, CRM ve destek kayıtlarınızı kendisi günceller. Kararı hep ekibiniz verir. Tek bir çağrı akışıyla başlayan pilotla deneyin."
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Pilot ne kadar sürer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tek bir çağrı akışıyla, kısa tutarak başlarız. Kapsamı da süreyi de birlikte kararlaştırırız."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mevcut telefon altyapımızla çalışır mı?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Evet. Kullandığınız hat ve santral yapısının üzerine kurulur; altyapınızı değiştirmenize gerek kalmaz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Luci yanlış bir şey söylerse ne olur?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sizin koyduğunuz sınır aşılır aşılmaz Luci görüşmeyi bir yetkiliye devreder. Dilerseniz her an kendiniz de araya girersiniz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Verilerimiz nerede saklanır?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Saklama süresini ve yerini, pilot kapsamını konuşurken kurumunuzun kendi politikalarına göre netleştiririz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ekibimizin yeni bir şey öğrenmesi gerekir mi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kurulumu ve devir kurallarını birlikte tanımlarız. Amacımız, ekibinizin günlük işine tek bir yük bile eklememek."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content" data-i18n="a11y.skipToContent">İçeriğe geç</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="lucithinx, ana sayfa">
+        <!-- LuciThinx logo — kullanıcının gerçek marka varlığı (şeffaf PNG). -->
+        <img class="brand-logo" src="/assets/logo.png" alt="LuciThinx" width="176" height="49" />
+      </a>
+
+      <nav class="main-nav" aria-label="Ana gezinme">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav-list">
+          <span class="sr-only" data-i18n="nav.toggle">Menüyü aç</span>
+          <span class="nav-toggle-icon" aria-hidden="true"></span>
+        </button>
+        <ul class="nav-list" id="primary-nav-list">
+          <li><a href="#how-it-works" data-i18n="nav.howItWorks">Nasıl çalışır</a></li>
+          <li><a href="#capabilities" data-i18n="nav.capabilities">Yetenekler</a></li>
+          <li><a href="#control" data-i18n="nav.control">İnsan kontrolü</a></li>
+          <li><a href="#integrations" data-i18n="nav.integrations">Entegrasyonlar</a></li>
+          <li><a href="#faq" data-i18n="nav.faq">SSS</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Dil seçimi">
+          <a class="lang-btn" data-lang="tr" href="/" aria-pressed="true">TR</a>
+          <a class="lang-btn" data-lang="en" href="/en/" aria-pressed="false">EN</a>
+        </div>
+        <a class="btn btn-ghost btn-small btn-login" href="https://dashboard.lucithinx.com/login" rel="nofollow" data-i18n="nav.login">Giriş</a>
+        <a class="btn btn-primary btn-small" href="#pilot" data-i18n="nav.cta">Pilotu başlat</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- 1. HERO -->
+    <section class="hero" id="top" aria-labelledby="hero-heading">
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="hero.eyebrow">AI çağrı operasyonu</p>
+          <h1 id="hero-heading" data-i18n="hero.heading">Her çağrı yönetilir. Hiçbiri kaybolmaz.</h1>
+          <p class="hero-sub" data-i18n="hero.sub">lucithinx'in yapay zekâ asistanı Luci, gelen ve giden çağrılarınızı karşılar, konuşmanın altındaki niyeti ve duyguyu okur, CRM ile destek kayıtlarınızı kendisi günceller. Ekibiniz baştan sona görür ve istediği an devralır.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#pilot" data-i18n="hero.ctaPrimary">Pilotu başlat</a>
+            <a class="btn btn-ghost" href="#how-it-works" data-i18n="hero.ctaSecondary">Nasıl çalıştığını gör</a>
+          </div>
+          <p class="hero-note" data-i18n="hero.note">Tek bir akışta kanıtlayın, sonra tüm operasyona ölçekleyin. Kontrol baştan sona sizde.</p>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <!-- Editoryal, statik hairline şema: ses çağrısı -> yapılandırılmış
+               kayıt. Mürekkep hairline, kağıt-dim kart. Gradyan/glow/animasyon
+               YOK. Tek aksan: kayıttaki küçük kil etiket. -->
+          <svg viewBox="0 0 480 360" class="wave-art hero-figure" role="img" aria-hidden="true">
+            <rect x="0.8" y="0.8" width="478.4" height="358.4" rx="16" fill="#f4f1ea" stroke="rgba(26,26,30,0.10)" stroke-width="1.4" />
+
+            <!-- gelen ses: düğüm + ses dalgaları -->
+            <circle class="fill-ink" cx="96" cy="180" r="6" />
+            <path class="stroke" d="M96 160 A 20 20 0 0 1 96 200" />
+            <path class="stroke" d="M96 150 A 30 30 0 0 1 96 210" />
+            <path class="stroke" d="M96 140 A 40 40 0 0 1 96 220" />
+
+            <!-- bağlayıcı -->
+            <path class="stroke" d="M150 180 L258 180" />
+            <circle class="fill-ink" cx="204" cy="180" r="3" />
+
+            <!-- yapılandırılmış kayıt kartı -->
+            <rect x="268" y="104" width="150" height="152" rx="12" fill="#ffffff" stroke="rgba(26,26,30,0.12)" stroke-width="1.4" />
+            <rect class="fill-ink" x="286" y="124" width="58" height="9" rx="4" />
+            <rect class="fill-soft" x="286" y="152" width="30" height="6" rx="3" />
+            <rect class="fill-soft" x="324" y="152" width="76" height="6" rx="3" />
+            <rect class="fill-soft" x="286" y="174" width="24" height="6" rx="3" />
+            <rect class="fill-soft" x="320" y="174" width="50" height="6" rx="3" />
+            <rect class="fill-accent" x="380" y="170" width="20" height="12" rx="6" />
+            <rect class="fill-soft" x="286" y="196" width="34" height="6" rx="3" />
+            <rect class="fill-soft" x="328" y="196" width="72" height="6" rx="3" />
+            <rect class="fill-soft" x="286" y="218" width="20" height="6" rx="3" />
+            <rect class="fill-soft" x="314" y="218" width="58" height="6" rx="3" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PROBLEM -->
+    <section class="section" id="problem" aria-labelledby="problem-heading">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="problem.eyebrow">Operasyonel baskı</p>
+          <h2 id="problem-heading" data-i18n="problem.heading">Hacim büyür, eski operasyon dayanmaz</h2>
+          <p class="section-lead" data-i18n="problem.lead">Aynı ekip, aynı mesai içinde daha fazla çağrıya yetişmeye çalışıyor. Sonuç bellidir: bekleyen hatlar, birbirini tutmayan notlar, arada kaynayan taleplerdir.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <h3 data-i18n="problem.card1.title">Dağınık kayıtlar</h3>
+            <p data-i18n="problem.card1.body">Herkes notunu kendince tutar. Konuşmanın özü sisteme aynı dille, aynı yerde bir türlü düşmez.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="problem.card2.title">Büyümenin faturası</h3>
+            <p data-i18n="problem.card2.body">Daha çok çağrının tek cevabı daha çok kişi almak gibi görünür. Oysa bu yol bir yerden sonra tıkanır.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="problem.card3.title">Kör noktalar</h3>
+            <p data-i18n="problem.card3.body">Hangi çağrı öfkeye döndü, hangi talep aslında acildi? Bu sinyaller çoğu zaman kimse görmeden geçip gider.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. HOW IT WORKS -->
+    <section class="section section-alt" id="how-it-works" aria-labelledby="how-heading">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="how.eyebrow">Nasıl çalışır</p>
+          <h2 id="how-heading" data-i18n="how.heading">Çağrıdan eyleme, dört adımda</h2>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step-index" aria-hidden="true">01</span>
+            <h3 data-i18n="how.step1.title">Çağrı gelir</h3>
+            <p data-i18n="how.step1.body">Gelen ya da giden çağrıyı Luci karşılar. Karşıdaki kişi robotla değil, doğal konuşan biriyle konuşur.</p>
+          </li>
+          <li class="step">
+            <span class="step-index" aria-hidden="true">02</span>
+            <h3 data-i18n="how.step2.title">Luci dinler ve anlar</h3>
+            <p data-i18n="how.step2.body">Luci konuşmayı anında çözümler. Talep, niyet ve ses tonundaki duygu ayrı ayrı ortaya çıkar.</p>
+          </li>
+          <li class="step">
+            <span class="step-index" aria-hidden="true">03</span>
+            <h3 data-i18n="how.step3.title">Harekete geçer</h3>
+            <p data-i18n="how.step3.body">CRM ve destek kaydı güncellenir, açılması gereken görevler kendiliğinden oluşur.</p>
+          </li>
+          <li class="step">
+            <span class="step-index" aria-hidden="true">04</span>
+            <h3 data-i18n="how.step4.title">Gerektiğinde devreder</h3>
+            <p data-i18n="how.step4.body">Sizin koyduğunuz sınır aşıldığında Luci görüşmeyi, tüm bağlamıyla birlikte bir yetkiliye geçirir.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. CAPABILITIES -->
+    <section class="section" id="capabilities" aria-labelledby="capabilities-heading">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="capabilities.eyebrow">Ürün yetenekleri</p>
+          <h2 id="capabilities-heading" data-i18n="capabilities.heading">Ciddi bir çağrı operasyonunun gerektirdiği her katman</h2>
+        </div>
+
+        <div class="grid grid-5">
+          <article class="card capability-card">
+            <span class="capability-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28"><path d="M6 13v6M11 8v16M16 4v24M21 8v16M26 13v6" stroke="#1a1a1e" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
+            </span>
+            <h3 data-i18n="capabilities.card1.title">Ses akışları</h3>
+            <p data-i18n="capabilities.card1.body">Hattan gelen sesi gecikmesiz işler, karşılıklı akan doğal bir konuşmaya çevirir.</p>
+          </article>
+          <article class="card capability-card">
+            <span class="capability-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28"><rect x="5" y="6" width="22" height="20" rx="3" stroke="#1a1a1e" stroke-width="2.5" fill="none"/><path d="M10 13h12M10 18h8" stroke="#1a1a1e" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </span>
+            <h3 data-i18n="capabilities.card2.title">Bağlam katmanı</h3>
+            <p data-i18n="capabilities.card2.body">Luci, müşterinin geçmişini ve önceki görüşmeleri konuşma sürerken hatırlar. Aynı şeyi iki kez sordurmaz.</p>
+          </article>
+          <article class="card capability-card">
+            <span class="capability-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28"><circle cx="16" cy="16" r="11" stroke="#1a1a1e" stroke-width="2.5" fill="none"/><path d="M16 9v7l5 3" stroke="#1a1a1e" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
+            </span>
+            <h3 data-i18n="capabilities.card3.title">Görüşme zekâsı</h3>
+            <p data-i18n="capabilities.card3.body">Luci konuşmanın nereye gittiğini izler; konu değişimini ve cevapsız kalan soruyu kaçırmaz.</p>
+          </article>
+          <article class="card capability-card">
+            <span class="capability-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28"><path d="M16 27s-9-5.7-9-13a6 6 0 0 1 11-3.3A6 6 0 0 1 25 14c0 7.3-9 13-9 13Z" stroke="#1a1a1e" stroke-width="2.5" fill="none" stroke-linejoin="round"/></svg>
+            </span>
+            <h3 data-i18n="capabilities.card4.title">Duygu ve niyet okuma</h3>
+            <p data-i18n="capabilities.card4.body">Luci, ses tonundan memnuniyeti, tedirginliği ya da aciliyeti daha kelimeler bitmeden yakalar.</p>
+          </article>
+          <article class="card capability-card">
+            <span class="capability-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28"><rect x="5" y="5" width="9" height="9" rx="2" stroke="#1a1a1e" stroke-width="2.5" fill="none"/><rect x="18" y="5" width="9" height="9" rx="2" stroke="#1a1a1e" stroke-width="2.5" fill="none"/><rect x="5" y="18" width="9" height="9" rx="2" stroke="#1a1a1e" stroke-width="2.5" fill="none"/><rect x="18" y="18" width="9" height="9" rx="2" stroke="#1a1a1e" stroke-width="2.5" fill="none"/></svg>
+            </span>
+            <h3 data-i18n="capabilities.card5.title">Operasyon kontrolü</h3>
+            <p data-i18n="capabilities.card5.body">Kurallar, sınırlar ve devir noktaları sizin elinizde kalır. Hepsi ayarlanabilir, hepsi izlenebilir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. HUMAN CONTROL & GUARDRAILS -->
+    <section class="section section-dark" id="control" aria-labelledby="control-heading">
+      <div class="shell control-inner">
+        <div class="section-head section-head-left">
+          <p class="eyebrow eyebrow-on-dark" data-i18n="control.eyebrow">İnsan kontrolü</p>
+          <h2 id="control-heading" data-i18n="control.heading">İşi AI yapar, kararı siz verirsiniz</h2>
+          <p class="section-lead section-lead-on-dark" data-i18n="control.lead">Otomasyon, denetimi elinizden almak için değil. lucithinx baştan; ekibinizin içini görebildiği, dilediği an durdurabildiği ve devralabildiği bir sistem olarak kuruldu.</p>
+        </div>
+
+        <div class="grid grid-2">
+          <article class="card card-on-dark">
+            <h3 data-i18n="control.card1.title">Devir kuralları</h3>
+            <p data-i18n="control.card1.body">Bir görüşme hangi durumda insana geçer? Bunu siz tanımlarsınız, sınırları kendi operasyonunuza göre çizersiniz.</p>
+          </article>
+          <article class="card card-on-dark">
+            <h3 data-i18n="control.card2.title">Onay noktaları</h3>
+            <p data-i18n="control.card2.body">Kritik bir adımın önüne onay koyabilirsiniz. Luci arkanızdan, siz görmeden karar vermez.</p>
+          </article>
+          <article class="card card-on-dark">
+            <h3 data-i18n="control.card3.title">Canlı izleme</h3>
+            <p data-i18n="control.card3.body">Süren görüşmeler ve açılan görevler panelinizde anlık akar. Ne olduğunu sonradan değil, o an görürsünüz.</p>
+          </article>
+          <article class="card card-on-dark">
+            <h3 data-i18n="control.card4.title">Denetlenebilirlik</h3>
+            <p data-i18n="control.card4.body">Her kararın neden verildiğini geriye dönüp izleyebilirsiniz. Ortada kara kutu yok.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. INTEGRATIONS -->
+    <section class="section" id="integrations" aria-labelledby="integrations-heading">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="integrations.eyebrow">Entegrasyonlar</p>
+          <h2 id="integrations-heading" data-i18n="integrations.heading">Kurulu düzeninizin üzerine oturur, yerine geçmez</h2>
+          <p class="section-lead" data-i18n="integrations.lead">lucithinx, kaydınızı tuttuğunuz ve konuştuğunuz araçlarla aynı dili konuşur.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <h3 data-i18n="integrations.card1.title">CRM sistemleri</h3>
+            <p data-i18n="integrations.card1.body">Müşteri kaydı, fırsat ve notlar siz uğraşmadan güncel kalır.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="integrations.card2.title">Destek / talep sistemleri</h3>
+            <p data-i18n="integrations.card2.body">Görüşme biter bitmez talep açılır ya da güncellenir, önceliği de etiketiyle birlikte gelir.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="integrations.card3.title">İletişim kanalları</h3>
+            <p data-i18n="integrations.card3.body">Telefon hattınızla ve ekibin haberleştiği bildirim araçlarıyla birlikte çalışır.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. TRANSPARENCY / EVIDENCE -->
+    <section class="section section-alt" id="transparency" aria-labelledby="transparency-heading">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="transparency.eyebrow">Şeffaflık</p>
+          <h2 id="transparency-heading" data-i18n="transparency.heading">Her görüşmenin tam kaydı, istediğiniz an önünüzde</h2>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <h3 data-i18n="transparency.card1.title">Çağrı kayıtları</h3>
+            <p data-i18n="transparency.card1.body">Sesin kendisi ve metin dökümü, aradığınız an tek tıkla önünüze gelecek şekilde saklanır.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="transparency.card2.title">Denetim izi</h3>
+            <p data-i18n="transparency.card2.body">Hangi adım ne zaman, hangi gerekçeyle atıldı? Hepsi tek tek kayıtlıdır.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="transparency.card3.title">Kalite gözden geçirme</h3>
+            <p data-i18n="transparency.card3.body">Örneklenen görüşmeler düzenli gözden geçirilir. Sistem, bu geri bildirimle her defasında biraz daha keskinleşir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-heading">
+      <div class="shell shell-narrow">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="faq.eyebrow">Sık sorulanlar</p>
+          <h2 id="faq-heading" data-i18n="faq.heading">Karar vermeden önce netleşmesi gerekenler</h2>
+        </div>
+
+        <div class="accordion">
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+                <span data-i18n="faq.q1.question">Pilot ne kadar sürer?</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>
+              <p data-i18n="faq.q1.answer">Tek bir çağrı akışıyla, kısa tutarak başlarız. Kapsamı da süreyi de birlikte kararlaştırırız.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+                <span data-i18n="faq.q2.question">Mevcut telefon altyapımızla çalışır mı?</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+              <p data-i18n="faq.q2.answer">Evet. Kullandığınız hat ve santral yapısının üzerine kurulur; altyapınızı değiştirmenize gerek kalmaz.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+                <span data-i18n="faq.q3.question">Luci yanlış bir şey söylerse ne olur?</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+              <p data-i18n="faq.q3.answer">Sizin koyduğunuz sınır aşılır aşılmaz Luci görüşmeyi bir yetkiliye devreder. Dilerseniz her an kendiniz de araya girersiniz.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+                <span data-i18n="faq.q4.question">Verilerimiz nerede saklanır?</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
+              <p data-i18n="faq.q4.answer">Saklama süresini ve yerini, pilot kapsamını konuşurken kurumunuzun kendi politikalarına göre netleştiririz.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+                <span data-i18n="faq.q5.question">Ekibimizin yeni bir şey öğrenmesi gerekir mi?</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden>
+              <p data-i18n="faq.q5.answer">Kurulumu ve devir kurallarını birlikte tanımlarız. Amacımız, ekibinizin günlük işine tek bir yük bile eklememek.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. PILOT CTA / FORM -->
+    <section class="section section-pilot" id="pilot" aria-labelledby="pilot-heading">
+      <div class="shell shell-narrow">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="pilot.eyebrow">Pilot programı</p>
+          <h2 id="pilot-heading" data-i18n="pilot.heading">Tek akışta kanıtlayalım, sonra ölçekleyelim</h2>
+          <p class="section-lead" data-i18n="pilot.lead">Operasyonunuzdan tek bir çağrı akışı seçin; lucithinx'i orada, düşük riskle kanıta çevirelim. Birkaç satır bilgi bırakın, size dönelim.</p>
+        </div>
+
+        <form
+          class="pilot-form"
+          id="pilot-form"
+          name="pilot"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          novalidate
+        >
+          <!--
+            Netlify Forms: bu statik form, build sırasında Netlify tarafından
+            taranıp otomatik olarak bir form handler'a bağlanır — sunucu kodu
+            gerekmez. `data-netlify="true"` + gizli `form-name` input, Netlify'ın
+            formu tanıması için şart. `netlify-honeypot` + gizli "bot-field",
+            spam botlarını e-posta/CRM entegrasyonu olmadan eler.
+
+            Davranış (bkz. app.js → handlePilotFormSubmit):
+              1. Mevcut istemci-taraf doğrulama (zorunlu alanlar + e-posta biçimi) çalışır.
+              2. Geçerliyse form Netlify'ın kendi origin'ine fetch(POST) ile gönderilir.
+              3. Netlify dışı bir hostta (veya yerel geliştirmede, file:///http.server)
+                 bu uç nokta yoktur — fetch başarısız olur ve kullanıcıya nazik bir
+                 hata mesajı gösterilir; sayfa çökmez (bkz. README "Deploy" bölümü).
+          -->
+          <input type="hidden" name="form-name" value="pilot" />
+          <p class="sr-only" aria-hidden="true">
+            <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+
+          <div class="form-row">
+            <label for="pilot-name" data-i18n="pilot.form.name">Ad Soyad</label>
+            <input type="text" id="pilot-name" name="name" autocomplete="name" required />
+          </div>
+
+          <div class="form-row">
+            <label for="pilot-company" data-i18n="pilot.form.company">Şirket</label>
+            <input type="text" id="pilot-company" name="company" autocomplete="organization" required />
+          </div>
+
+          <div class="form-row">
+            <label for="pilot-email" data-i18n="pilot.form.email">E-posta</label>
+            <input type="email" id="pilot-email" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="form-row">
+            <label for="pilot-volume" data-i18n="pilot.form.volume">Aylık çağrı hacmi (yaklaşık)</label>
+            <select id="pilot-volume" name="volume" required>
+              <option value="" data-i18n="pilot.form.volumePlaceholder">Seçin</option>
+              <option value="under-500" data-i18n="pilot.form.volume1">500'den az</option>
+              <option value="500-2000" data-i18n="pilot.form.volume2">500 – 2.000</option>
+              <option value="2000-10000" data-i18n="pilot.form.volume3">2.000 – 10.000</option>
+              <option value="over-10000" data-i18n="pilot.form.volume4">10.000'den fazla</option>
+            </select>
+          </div>
+
+          <div class="form-row form-row-full">
+            <label for="pilot-message" data-i18n="pilot.form.message">Mesajınız (opsiyonel)</label>
+            <textarea id="pilot-message" name="message" rows="4"></textarea>
+          </div>
+
+          <div class="form-row form-row-full">
+            <button type="submit" class="btn btn-primary">
+              <span data-i18n="pilot.form.submit">Pilotu başlat</span>
+            </button>
+            <p class="form-status" id="pilot-form-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="lucithinx, ana sayfa">
+          <img class="brand-mark-img" src="/assets/wave.png" alt="" aria-hidden="true" width="64" height="14" />
+          <span class="brand-word brand-word-footer"><span class="brand-luci">Luci</span>Thinx</span>
+        </a>
+        <p class="footer-tag" data-i18n="footer.tagline">Çağrı operasyonunuzu yöneten AI.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Alt bilgi gezinmesi">
+        <a href="#how-it-works" data-i18n="nav.howItWorks">Nasıl çalışır</a>
+        <a href="#capabilities" data-i18n="nav.capabilities">Yetenekler</a>
+        <a href="#control" data-i18n="nav.control">İnsan kontrolü</a>
+        <a href="#integrations" data-i18n="nav.integrations">Entegrasyonlar</a>
+        <a href="#faq" data-i18n="nav.faq">SSS</a>
+        <a href="#pilot" data-i18n="nav.cta">Pilotu başlat</a>
+        <a href="https://dashboard.lucithinx.com/login" rel="nofollow" data-i18n="nav.login">Giriş</a>
+      </nav>
+
+      <div class="footer-meta">
+        <div class="lang-switch lang-switch-footer" role="group" aria-label="Dil seçimi">
+          <a class="lang-btn" data-lang="tr" href="/" aria-pressed="true">TR</a>
+          <a class="lang-btn" data-lang="en" href="/en/" aria-pressed="false">EN</a>
+        </div>
+        <p class="footer-copyright">
+          <span data-i18n="footer.copyright">© 2026 lucithinx. Tüm hakları saklıdır.</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/i18n.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

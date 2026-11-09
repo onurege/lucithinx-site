@@ -1,0 +1,58 @@
+# Netlify deploy configuration for the lucithinx marketing site.
+#
+# This is a fully static, self-contained site (no build step, no external
+# requests) — publish dir is the repo root. Netlify Forms detects the
+# `data-netlify="true"` form in index.html at deploy time automatically;
+# no separate forms config is required here.
+
+[build]
+  publish = "."
+
+# ---------------------------------------------------------------------
+# Security headers
+# ---------------------------------------------------------------------
+# Applied to every path. The CSP below is deliberately tight: almost all
+# behavior lives in app.js/i18n.js (both loaded via <script src>) and all
+# styling lives in styles.css (loaded via <link rel="stylesheet">), so
+# neither 'unsafe-inline' nor 'unsafe-eval' is needed for style-src.
+#
+# script-src carries a small, fixed allowlist of 'sha256-...' hashes on
+# top of 'self'. These cover the inline `<script type="application/ld+json">`
+# structured-data blocks (Organization/SoftwareApplication/FAQPage) baked
+# into index.html and en/index.html by scripts/build.mjs — NOT arbitrary
+# inline script execution. build.mjs computes these hashes from the exact
+# script bodies it just wrote and rewrites this line automatically on every
+# run (see scripts/build.mjs → updateNetlifyCsp); never hand-edit the hash
+# list here, it will be overwritten and can drift from what's served.
+# There are no inline style="" attributes and no other inline <script>
+# blocks anywhere on the site — see README "SEO / Open Graph" and Frontend
+# Engineer delivery notes for how this was verified.
+#
+# img-src allows 'data:' because the favicon and brand mark are inline
+# data-URI SVGs in index.html (no external image host is used).
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-u0HpNR1RmHrCvjZVHchhPCPfh2yImurhwtgQhEeNQXY=' 'sha256-/EiUqAgdZzEYm9ZeMHX/CGYZ/BBBPa0Nl7v9xmr5rJs=' 'sha256-UM/pivWdhsMoJCPQ/xOp9yPZrrXaWD68dprLZjcdsZY=' 'sha256-pq+AcG8Lvzmd8N3RUB8UR0fjUZkJw+zQcBr28idLfRU=' 'sha256-93eG2Z0lRyk69fk+6EVtEBz1Au76Rs3j+68IxLv+mhM=' 'sha256-A0Mop04PpqXk89C9OQrbd59Qr2Ru8Ncl1wrcuZ3cKxo='; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+
+# ---------------------------------------------------------------------
+# Redirects
+# ---------------------------------------------------------------------
+# Two static, indexable pages ship today: "/" (en/index.html's TR sibling,
+# i.e. index.html) and "/en/" (en/index.html). Netlify serves an existing
+# file at a matching path (e.g. en/index.html for a request to "/en/")
+# before falling through to the redirects below — no explicit rule is
+# needed to route "/en/" correctly, it Just Works because the file exists
+# at build time (see scripts/build.mjs, which writes en/index.html).
+#
+# Every other, truly unknown path renders the branded 404 with a real 404
+# status (not a soft-redirect to "/"), so search engines and monitoring
+# correctly see a Not Found rather than a silent 200.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

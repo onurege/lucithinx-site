@@ -1,0 +1,523 @@
+<!--
+  SOURCE TEMPLATE — do not deploy this file directly.
+
+  This is the single source of markup for both locales. `scripts/build.mjs`
+  reads this file plus `i18n.js` and produces two static, fully-baked
+  outputs: `index.html` (TR) and `en/index.html` (EN). Edit THIS file (and
+  `i18n.js` for copy) — never hand-edit the generated outputs, your changes
+  will be overwritten by the next build.
+
+  Placeholders the build step fills in, per locale:
+    __LANG__            -> "tr" | "en"                     (html lang attribute)
+    __HEAD_SEO__        -> canonical + hreflang + og:locale + robots block
+    __JSONLD__          -> Organization + SoftwareApplication + FAQPage
+                           structured-data script blocks
+
+  Everything else (data-i18n / data-i18n-attr nodes) is baked with the
+  target locale's strings by the build step. The data-i18n* attributes
+  themselves are left in the output markup as a stable, greppable marker
+  of which node maps to which translation key (useful for future tooling
+  and for humans diffing TR vs EN output) — app.js no longer reads them at
+  runtime; language is fixed per URL, not swapped client-side (see the
+  i18n section of app.js for why).
+
+  All asset references are root-absolute (/styles.css, /app.js, /i18n.js,
+  /assets/...) so this exact markup works unmodified from both "/" and
+  "/en/" — no <base href> trick, which would otherwise break relative
+  links.
+-->
+<!DOCTYPE html>
+<html lang="__LANG__">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="meta.title">lucithinx — Sesi netliğe çeviren AI çağrı operasyonu</title>
+  <meta name="description" data-i18n-attr="content:meta.description"
+    content="lucithinx, gelen ve giden telefon çağrılarını AI ile karşılar, niyeti ve duyguyu anlar, CRM'inizi günceller ve ekibinizi her zaman kontrolde tutar. Tek iş akışıyla başlayan pilot programla tanışın." />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#FBFAF7" />
+
+  __HEAD_SEO__
+
+  <!-- Favicon: real PNG file at root so Google Search reliably crawls/shows it -->
+  <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+
+  <link rel="stylesheet" href="/styles.css" />
+
+  __JSONLD__
+</head>
+<body>
+  <a class="skip-link" href="#main-content" data-i18n="a11y.skipToContent">İçeriğe geç</a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="lucithinx, ana sayfa">
+        <!-- LuciThinx logo — kullanıcının gerçek marka varlığı (şeffaf PNG). -->
+        <img class="brand-logo" src="/assets/logo.png" alt="LuciThinx" width="176" height="49" />
+      </a>
+
+      <nav class="main-nav" aria-label="Ana gezinme">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav-list">
+          <span class="sr-only" data-i18n="nav.toggle">Menüyü aç</span>
+          <span class="nav-toggle-icon" aria-hidden="true"></span>
+        </button>
+        <ul class="nav-list" id="primary-nav-list">
+          <li><a href="#how-it-works" data-i18n="nav.howItWorks">Nasıl çalışır</a></li>
+          <li><a href="#capabilities" data-i18n="nav.capabilities">Yetenekler</a></li>
+          <li><a href="#control" data-i18n="nav.control">İnsan kontrolü</a></li>
+          <li><a href="#integrations" data-i18n="nav.integrations">Entegrasyonlar</a></li>
+          <li><a href="#faq" data-i18n="nav.faq">SSS</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Dil seçimi">
+          <a class="lang-btn" data-lang="tr" href="/" aria-pressed="true">TR</a>
+          <a class="lang-btn" data-lang="en" href="/en/" aria-pressed="false">EN</a>
+        </div>
+        <a class="btn btn-ghost btn-small btn-login" href="https://dashboard.lucithinx.com/login" rel="nofollow" data-i18n="nav.login">Giriş</a>
+        <a class="btn btn-primary btn-small" href="#pilot" data-i18n="nav.cta">Pilotu planla</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- 1. HERO -->
+    <section class="hero" id="top" aria-labelledby="hero-heading">
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="hero.eyebrow">AI çağrı operasyonu</p>
+          <h1 id="hero-heading" data-i18n="hero.heading">
+            Her çağrı, kaybolmadan önce anlaşılan bir sinyale dönüşsün
+          </h1>
+          <p class="hero-sub" data-i18n="hero.sub">
+            lucithinx gelen ve giden telefon çağrılarınızı AI ile karşılar, konuşmadan niyeti ve
+            duyguyu çıkarır, CRM ve destek kayıtlarınızı günceller — ekibiniz her an kontrolü elinde tutar.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#pilot" data-i18n="hero.ctaPrimary">Pilotu planla</a>
+            <a class="btn btn-ghost" href="#how-it-works" data-i18n="hero.ctaSecondary">Nasıl çalıştığını gör</a>
+          </div>
+          <p class="hero-note" data-i18n="hero.note">Tek iş akışıyla başlayan pilot programla, riski üstlenmeden test edin.</p>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <!-- Editoryal, statik hairline şema: ses çağrısı -> yapılandırılmış
+               kayıt. Mürekkep hairline, kağıt-dim kart. Gradyan/glow/animasyon
+               YOK. Tek aksan: kayıttaki küçük kil etiket. -->
+          <svg viewBox="0 0 480 360" class="wave-art hero-figure" role="img" aria-hidden="true">
+            <rect x="0.8" y="0.8" width="478.4" height="358.4" rx="16" fill="#f4f1ea" stroke="rgba(26,26,30,0.10)" stroke-width="1.4" />
+
+            <!-- gelen ses: düğüm + ses dalgaları -->
+            <circle class="fill-ink" cx="96" cy="180" r="6" />
+            <path class="stroke" d="M96 160 A 20 20 0 0 1 96 200" />
+            <path class="stroke" d="M96 150 A 30 30 0 0 1 96 210" />
+            <path class="stroke" d="M96 140 A 40 40 0 0 1 96 220" />
+
+            <!-- bağlayıcı -->
+            <path class="stroke" d="M150 180 L258 180" />
+            <circle class="fill-ink" cx="204" cy="180" r="3" />
+
+            <!-- yapılandırılmış kayıt kartı -->
+            <rect x="268" y="104" width="150" height="152" rx="12" fill="#ffffff" stroke="rgba(26,26,30,0.12)" stroke-width="1.4" />
+            <rect class="fill-ink" x="286" y="124" width="58" height="9" rx="4" />
+            <rect class="fill-soft" x="286" y="152" width="30" height="6" rx="3" />
+            <rect class="fill-soft" x="324" y="152" width="76" height="6" rx="3" />
+            <rect class="fill-soft" x="286" y="174" width="24" height="6" rx="3" />
+            <rect class="fill-soft" x="320" y="174" width="50" height="6" rx="3" />
+            <rect class="fill-accent" x="380" y="170" width="20" height="12" rx="6" />
+            <rect class="fill-soft" x="286" y="196" width="34" height="6" rx="3" />
+            <rect class="fill-soft" x="328" y="196" width="72" height="6" rx="3" />
+            <rect class="fill-soft" x="286" y="218" width="20" height="6" rx="3" />
+            <rect class="fill-soft" x="314" y="218" width="58" height="6" rx="3" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PROBLEM -->
+    <section class="section" id="problem" aria-labelledby="problem-heading">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="problem.eyebrow">Operasyonel baskı</p>
+          <h2 id="problem-heading" data-i18n="problem.heading">Çağrı hacmi büyüdükçe eski operasyon çatlar</h2>
+          <p class="section-lead" data-i18n="problem.lead">
+            Ekipler daha fazla çağrıyı, aynı saatlerde, aynı insan sayısıyla karşılamaya çalışıyor.
+            Sonuç: bekleyen aramalar, tutarsız notlar, kaçan detaylar.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <h3 data-i18n="problem.card1.title">Dağınık kayıtlar</h3>
+            <p data-i18n="problem.card1.body">Her temsilci farklı şekilde not alır; konuşmanın özü sistemde tutarlı biçimde yer bulamaz.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="problem.card2.title">Pahalı büyüme</h3>
+            <p data-i18n="problem.card2.body">Hacmi karşılamak için tek çözüm daha fazla kişi işe almak gibi görünür; bu ölçeklenmez.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="problem.card3.title">Kör noktalar</h3>
+            <p data-i18n="problem.card3.body">Hangi çağrı memnuniyetsizliğe döndü, hangi talep aciliyet taşıyordu — bu sinyaller genelde fark edilmeden geçer.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. HOW IT WORKS -->
+    <section class="section section-alt" id="how-it-works" aria-labelledby="how-heading">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="how.eyebrow">Nasıl çalışır</p>
+          <h2 id="how-heading" data-i18n="how.heading">Çağrıdan eyleme, dört adımda</h2>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <span class="step-index" aria-hidden="true">01</span>
+            <h3 data-i18n="how.step1.title">Çağrı gelir</h3>
+            <p data-i18n="how.step1.body">Gelen veya giden bir çağrı lucithinx tarafından karşılanır; müşteri doğal konuşma diliyle karşılık bulur.</p>
+          </li>
+          <li class="step">
+            <span class="step-index" aria-hidden="true">02</span>
+            <h3 data-i18n="how.step2.title">AI dinler ve anlar</h3>
+            <p data-i18n="how.step2.body">Konuşma canlı olarak yapılandırılır: talep, niyet ve duygu tonu ayrıştırılır.</p>
+          </li>
+          <li class="step">
+            <span class="step-index" aria-hidden="true">03</span>
+            <h3 data-i18n="how.step3.title">Sistem eyleme geçer</h3>
+            <p data-i18n="how.step3.body">CRM ve destek kayıtları güncellenir, gerekli görevler otomatik açılır.</p>
+          </li>
+          <li class="step">
+            <span class="step-index" aria-hidden="true">04</span>
+            <h3 data-i18n="how.step4.title">Gerektiğinde insana devir</h3>
+            <p data-i18n="how.step4.body">Tanımlı eşikler aşıldığında görüşme, bağlamıyla birlikte bir yetkiliye aktarılır.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. CAPABILITIES -->
+    <section class="section" id="capabilities" aria-labelledby="capabilities-heading">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="capabilities.eyebrow">Ürün yetenekleri</p>
+          <h2 id="capabilities-heading" data-i18n="capabilities.heading">Bir çağrı operasyonunun ihtiyaç duyduğu her katman</h2>
+        </div>
+
+        <div class="grid grid-5">
+          <article class="card capability-card">
+            <span class="capability-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28"><path d="M6 13v6M11 8v16M16 4v24M21 8v16M26 13v6" stroke="#1a1a1e" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
+            </span>
+            <h3 data-i18n="capabilities.card1.title">Ses akışları</h3>
+            <p data-i18n="capabilities.card1.body">Telefon hatlarından gelen sesi düşük gecikmeyle işleyip doğal bir diyaloğa çevirir.</p>
+          </article>
+          <article class="card capability-card">
+            <span class="capability-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28"><rect x="5" y="6" width="22" height="20" rx="3" stroke="#1a1a1e" stroke-width="2.5" fill="none"/><path d="M10 13h12M10 18h8" stroke="#1a1a1e" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </span>
+            <h3 data-i18n="capabilities.card2.title">Bağlam katmanı</h3>
+            <p data-i18n="capabilities.card2.body">Müşteri geçmişini ve önceki görüşmeleri konuşma sırasında hatırlar, tekrar sormaz.</p>
+          </article>
+          <article class="card capability-card">
+            <span class="capability-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28"><circle cx="16" cy="16" r="11" stroke="#1a1a1e" stroke-width="2.5" fill="none"/><path d="M16 9v7l5 3" stroke="#1a1a1e" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
+            </span>
+            <h3 data-i18n="capabilities.card3.title">Görüşme zekâsı</h3>
+            <p data-i18n="capabilities.card3.body">Konuşmanın akışını takip eder, konu değişimlerini ve açık kalan soruları yakalar.</p>
+          </article>
+          <article class="card capability-card">
+            <span class="capability-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28"><path d="M16 27s-9-5.7-9-13a6 6 0 0 1 11-3.3A6 6 0 0 1 25 14c0 7.3-9 13-9 13Z" stroke="#1a1a1e" stroke-width="2.5" fill="none" stroke-linejoin="round"/></svg>
+            </span>
+            <h3 data-i18n="capabilities.card4.title">Duygu ve niyet analizi</h3>
+            <p data-i18n="capabilities.card4.body">Sesin tonundan memnuniyet, tedirginlik veya aciliyet sinyallerini çıkarır.</p>
+          </article>
+          <article class="card capability-card">
+            <span class="capability-icon" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="28" height="28"><rect x="5" y="5" width="9" height="9" rx="2" stroke="#1a1a1e" stroke-width="2.5" fill="none"/><rect x="18" y="5" width="9" height="9" rx="2" stroke="#1a1a1e" stroke-width="2.5" fill="none"/><rect x="5" y="18" width="9" height="9" rx="2" stroke="#1a1a1e" stroke-width="2.5" fill="none"/><rect x="18" y="18" width="9" height="9" rx="2" stroke="#1a1a1e" stroke-width="2.5" fill="none"/></svg>
+            </span>
+            <h3 data-i18n="capabilities.card5.title">Operasyon kontrolü</h3>
+            <p data-i18n="capabilities.card5.body">Kurallar, eşikler ve devir noktaları operasyon ekibinin elinde kalır; ayarlanabilir ve izlenebilir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. HUMAN CONTROL & GUARDRAILS -->
+    <section class="section section-dark" id="control" aria-labelledby="control-heading">
+      <div class="shell control-inner">
+        <div class="section-head section-head-left">
+          <p class="eyebrow eyebrow-on-dark" data-i18n="control.eyebrow">İnsan kontrolü</p>
+          <h2 id="control-heading" data-i18n="control.heading">AI çalışır, kararı ekibiniz verir</h2>
+          <p class="section-lead section-lead-on-dark" data-i18n="control.lead">
+            Otomasyon, denetimin yerini almaz. lucithinx her adımda ekibinizin görebileceği,
+            durdurabileceği ve devralabileceği bir sistem olarak tasarlandı.
+          </p>
+        </div>
+
+        <div class="grid grid-2">
+          <article class="card card-on-dark">
+            <h3 data-i18n="control.card1.title">Devir kuralları</h3>
+            <p data-i18n="control.card1.body">Hangi durumda görüşmenin bir insana aktarılacağını siz tanımlarsınız; eşikler operasyona göre ayarlanır.</p>
+          </article>
+          <article class="card card-on-dark">
+            <h3 data-i18n="control.card2.title">Onay noktaları</h3>
+            <p data-i18n="control.card2.body">Kritik eylemler öncesinde onay adımı eklenebilir; AI hiçbir zaman görünmez şekilde karar almaz.</p>
+          </article>
+          <article class="card card-on-dark">
+            <h3 data-i18n="control.card3.title">Canlı izleme</h3>
+            <p data-i18n="control.card3.body">Devam eden görüşmeler ve açılan görevler operasyon panelinizde gerçek zamanlı görünür.</p>
+          </article>
+          <article class="card card-on-dark">
+            <h3 data-i18n="control.card4.title">Denetlenebilirlik</h3>
+            <p data-i18n="control.card4.body">Her kararın nasıl alındığı geriye dönük incelenebilir; kara kutu yok.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. INTEGRATIONS -->
+    <section class="section" id="integrations" aria-labelledby="integrations-heading">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="integrations.eyebrow">Entegrasyonlar</p>
+          <h2 id="integrations-heading" data-i18n="integrations.heading">Mevcut sisteminize eklenir, onu yerinden etmez</h2>
+          <p class="section-lead" data-i18n="integrations.lead">lucithinx, kullandığınız kayıt ve iletişim araçlarıyla konuşur.</p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <h3 data-i18n="integrations.card1.title">CRM sistemleri</h3>
+            <p data-i18n="integrations.card1.body">Müşteri kayıtları, fırsatlar ve notlar otomatik güncellenir.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="integrations.card2.title">Destek / talep sistemleri</h3>
+            <p data-i18n="integrations.card2.body">Görüşme sonunda talep kayıtları açılır veya güncellenir, öncelik etiketlenir.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="integrations.card3.title">İletişim kanalları</h3>
+            <p data-i18n="integrations.card3.body">Telefon hattınızla ve ekip içi bildirim araçlarınızla entegre çalışır.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. TRANSPARENCY / EVIDENCE -->
+    <section class="section section-alt" id="transparency" aria-labelledby="transparency-heading">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="transparency.eyebrow">Şeffaflık</p>
+          <h2 id="transparency-heading" data-i18n="transparency.heading">Her görüşme geriye dönük incelenebilir</h2>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <h3 data-i18n="transparency.card1.title">Çağrı kayıtları</h3>
+            <p data-i18n="transparency.card1.body">Ses ve metin dökümü, ihtiyaç duyduğunuzda tek tıkla erişilebilir şekilde saklanır.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="transparency.card2.title">Denetim izi</h3>
+            <p data-i18n="transparency.card2.body">Hangi eylemin ne zaman, hangi gerekçeyle alındığı kayıt altındadır.</p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="transparency.card3.title">Kalite gözden geçirme</h3>
+            <p data-i18n="transparency.card3.body">Örneklenen görüşmeler düzenli olarak gözden geçirilir, sistem bu geri bildirimle iyileştirilir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-heading">
+      <div class="shell shell-narrow">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="faq.eyebrow">Sık sorulanlar</p>
+          <h2 id="faq-heading" data-i18n="faq.heading">Pilot öncesi merak edilenler</h2>
+        </div>
+
+        <div class="accordion">
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+                <span data-i18n="faq.q1.question">Pilot programı ne kadar sürer?</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>
+              <p data-i18n="faq.q1.answer">Pilot, tek bir iş akışıyla sınırlı ve kısa süreli başlar; kapsam ve süre birlikte belirlenir.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+                <span data-i18n="faq.q2.question">Mevcut telefon altyapımızla çalışır mı?</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+              <p data-i18n="faq.q2.answer">Evet; mevcut hat ve santral yapınıza entegre olacak şekilde kurulur, altyapınızı değiştirmeniz gerekmez.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+                <span data-i18n="faq.q3.question">AI yanlış bir şey söylerse ne olur?</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+              <p data-i18n="faq.q3.answer">Tanımladığınız eşikler aşıldığında görüşme anında bir yetkiliye devredilir; siz her zaman devreye girebilirsiniz.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+                <span data-i18n="faq.q4.question">Verilerimiz nerede saklanır?</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
+              <p data-i18n="faq.q4.answer">Saklama süresi ve konumu, pilot kapsamı görüşülürken kurumunuzun politikalarına göre netleştirilir.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+                <span data-i18n="faq.q5.question">Ekibimizin bir şey öğrenmesi gerekiyor mu?</span>
+                <span class="accordion-icon" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="accordion-panel" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden>
+              <p data-i18n="faq.q5.answer">Kurulum ve devir kurallarını birlikte tanımlarız; ekibinizin günlük işine ek bir yük getirmemesi hedeflenir.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. PILOT CTA / FORM -->
+    <section class="section section-pilot" id="pilot" aria-labelledby="pilot-heading">
+      <div class="shell shell-narrow">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="pilot.eyebrow">Pilot programı</p>
+          <h2 id="pilot-heading" data-i18n="pilot.heading">Pilot kapsamını birlikte konuşalım</h2>
+          <p class="section-lead" data-i18n="pilot.lead">
+            Tek bir çağrı akışıyla başlayan, riski düşük bir pilot önerimiz var. Birkaç bilgiyle size dönüş yapalım.
+          </p>
+        </div>
+
+        <form
+          class="pilot-form"
+          id="pilot-form"
+          name="pilot"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          novalidate
+        >
+          <!--
+            Netlify Forms: bu statik form, build sırasında Netlify tarafından
+            taranıp otomatik olarak bir form handler'a bağlanır — sunucu kodu
+            gerekmez. `data-netlify="true"` + gizli `form-name` input, Netlify'ın
+            formu tanıması için şart. `netlify-honeypot` + gizli "bot-field",
+            spam botlarını e-posta/CRM entegrasyonu olmadan eler.
+
+            Davranış (bkz. app.js → handlePilotFormSubmit):
+              1. Mevcut istemci-taraf doğrulama (zorunlu alanlar + e-posta biçimi) çalışır.
+              2. Geçerliyse form Netlify'ın kendi origin'ine fetch(POST) ile gönderilir.
+              3. Netlify dışı bir hostta (veya yerel geliştirmede, file:///http.server)
+                 bu uç nokta yoktur — fetch başarısız olur ve kullanıcıya nazik bir
+                 hata mesajı gösterilir; sayfa çökmez (bkz. README "Deploy" bölümü).
+          -->
+          <input type="hidden" name="form-name" value="pilot" />
+          <p class="sr-only" aria-hidden="true">
+            <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+
+          <div class="form-row">
+            <label for="pilot-name" data-i18n="pilot.form.name">Ad Soyad</label>
+            <input type="text" id="pilot-name" name="name" autocomplete="name" required />
+          </div>
+
+          <div class="form-row">
+            <label for="pilot-company" data-i18n="pilot.form.company">Şirket</label>
+            <input type="text" id="pilot-company" name="company" autocomplete="organization" required />
+          </div>
+
+          <div class="form-row">
+            <label for="pilot-email" data-i18n="pilot.form.email">E-posta</label>
+            <input type="email" id="pilot-email" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="form-row">
+            <label for="pilot-volume" data-i18n="pilot.form.volume">Aylık çağrı hacmi (yaklaşık)</label>
+            <select id="pilot-volume" name="volume" required>
+              <option value="" data-i18n="pilot.form.volumePlaceholder">Seçin</option>
+              <option value="under-500" data-i18n="pilot.form.volume1">500'den az</option>
+              <option value="500-2000" data-i18n="pilot.form.volume2">500 – 2.000</option>
+              <option value="2000-10000" data-i18n="pilot.form.volume3">2.000 – 10.000</option>
+              <option value="over-10000" data-i18n="pilot.form.volume4">10.000'den fazla</option>
+            </select>
+          </div>
+
+          <div class="form-row form-row-full">
+            <label for="pilot-message" data-i18n="pilot.form.message">Mesajınız (opsiyonel)</label>
+            <textarea id="pilot-message" name="message" rows="4"></textarea>
+          </div>
+
+          <div class="form-row form-row-full">
+            <button type="submit" class="btn btn-primary">
+              <span data-i18n="pilot.form.submit">Pilot talebini gönder</span>
+            </button>
+            <p class="form-status" id="pilot-form-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="lucithinx, ana sayfa">
+          <img class="brand-mark-img" src="/assets/wave.png" alt="" aria-hidden="true" width="64" height="14" />
+          <span class="brand-word brand-word-footer"><span class="brand-luci">Luci</span>Thinx</span>
+        </a>
+        <p class="footer-tag" data-i18n="footer.tagline">Sesi netliğe çeviren AI çağrı operasyonu.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Alt bilgi gezinmesi">
+        <a href="#how-it-works" data-i18n="nav.howItWorks">Nasıl çalışır</a>
+        <a href="#capabilities" data-i18n="nav.capabilities">Yetenekler</a>
+        <a href="#control" data-i18n="nav.control">İnsan kontrolü</a>
+        <a href="#integrations" data-i18n="nav.integrations">Entegrasyonlar</a>
+        <a href="#faq" data-i18n="nav.faq">SSS</a>
+        <a href="#pilot" data-i18n="nav.cta">Pilotu planla</a>
+        <a href="https://dashboard.lucithinx.com/login" rel="nofollow" data-i18n="nav.login">Giriş</a>
+      </nav>
+
+      <div class="footer-meta">
+        <div class="lang-switch lang-switch-footer" role="group" aria-label="Dil seçimi">
+          <a class="lang-btn" data-lang="tr" href="/" aria-pressed="true">TR</a>
+          <a class="lang-btn" data-lang="en" href="/en/" aria-pressed="false">EN</a>
+        </div>
+        <p class="footer-copyright">
+          <span data-i18n="footer.copyright">© 2026 lucithinx. Tüm hakları saklıdır.</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/i18n.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

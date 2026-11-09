@@ -1,0 +1,1033 @@
+/* =========================================================================
+   lucithinx — marketing site styles
+   Design language: light-first, warm paper background, violet + coral signal
+   accent. Deliberately distinct from dark-tech + single-cyan-accent category
+   convention (see brief §"Görsel kimlik").
+   ========================================================================= */
+
+/* ---------------------------------------------------------------------
+   1. Design tokens — every "magic number" lives here, named by intent.
+   --------------------------------------------------------------------- */
+:root {
+  /* Color: brand */
+  --color-ink: #1a1a1e;
+  --color-paper: #fbfaf7;
+  --color-paper-dim: #f2efe9;
+  /* Single restrained editorial accent (clay). Used sparingly. */
+  --color-accent: #1596b4;
+  --color-accent-dark: #0f7c96;
+  --color-brand-cyan: #22abcb;
+  /* Legacy aliases so existing rules resolve to the single accent (no gradient). */
+  --color-primary: #1596b4;
+  --color-primary-dark: #0f7c96;
+  --color-signal: #1596b4;
+  --color-signal-dark: #0f7c96;
+
+  /* Color: neutrals derived from ink for consistent tinting */
+  --color-text-body: #33313a;
+  --color-text-muted: #6a6874;
+  --color-border-hairline: rgba(26, 26, 30, 0.12);
+  --color-border-hairline-strong: rgba(26, 26, 30, 0.2);
+  --color-surface-card: #ffffff;
+
+  /* Color: on-dark section (single contrast section, not the whole site) */
+  --color-on-dark-text: #f4f3ef;
+  --color-on-dark-muted: #a7a4ad;
+  --color-on-dark-surface: #1f1f24;
+  --color-on-dark-border: rgba(244, 243, 239, 0.14);
+
+  /* No signature gradient in the editorial system — the accent is solid. */
+  --gradient-signature: var(--color-accent);
+
+  /* Typography: self-contained system stack, no external font requests */
+  --font-family-base:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.125rem;
+  --font-size-lg: 1.375rem;
+  --font-size-xl: 1.875rem;
+  --font-size-2xl: 2.75rem;
+  --font-size-3xl: 3.75rem;
+
+  --line-height-tight: 1.15;
+  --line-height-snug: 1.35;
+  --line-height-body: 1.6;
+
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-wide: 0.08em;
+
+  /* Spacing scale (8px rhythm) */
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 5.5rem;
+  --space-8: 7.5rem;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* Elevation — soft, never harsh */
+  --shadow-card: 0 1px 2px rgba(26, 26, 30, 0.04);
+  --shadow-card-hover: 0 6px 20px rgba(26, 26, 30, 0.08);
+
+  /* Motion */
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --shell-max-width: 1180px;
+  --shell-max-width-narrow: 760px;
+  --shell-padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  --header-height: 76px;
+}
+
+/* ---------------------------------------------------------------------
+   2. Reset & base
+   --------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 0;
+  overflow-x: hidden;
+  background-color: var(--color-paper);
+  color: var(--color-text-body);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+ol,
+ul,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Respect user motion preference everywhere */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   3. Accessibility utilities
+   --------------------------------------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-3);
+  z-index: 100;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-radius: var(--radius-sm);
+  /* Fully hidden off-screen (relative to own height) until keyboard focus. */
+  transform: translateY(-200%);
+  transition: transform var(--duration-fast) var(--easing-standard);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Consistent, visible focus ring across all interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------------------------------------------------------------------
+   4. Layout primitives
+   --------------------------------------------------------------------- */
+.shell {
+  width: 100%;
+  max-width: var(--shell-max-width);
+  margin-inline: auto;
+  padding-inline: var(--shell-padding-inline);
+}
+
+.shell-narrow {
+  max-width: var(--shell-max-width-narrow);
+}
+
+.section {
+  padding-block: var(--space-8);
+}
+
+.section-alt {
+  background-color: var(--color-paper-dim);
+}
+
+.section-dark {
+  background-color: var(--color-ink);
+  color: var(--color-on-dark-text);
+}
+
+.section-pilot {
+  background-color: var(--color-paper-dim);
+}
+
+.section-head {
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: var(--space-6);
+  text-align: center;
+}
+
+.section-head-left {
+  margin-inline: 0;
+  text-align: left;
+  max-width: 520px;
+}
+
+.section-lead {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-snug);
+}
+
+.section-lead-on-dark {
+  color: var(--color-on-dark-muted);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 960px) {
+  .grid-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .grid-2,
+  .grid-3,
+  .grid-5 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   5. Typography
+   --------------------------------------------------------------------- */
+.eyebrow {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-primary-dark);
+}
+
+.eyebrow-on-dark {
+  color: #c9b8ff;
+}
+
+h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-ink);
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-ink);
+}
+
+.section-dark h2 {
+  color: var(--color-on-dark-text);
+}
+
+h3 {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: var(--space-1);
+}
+
+.section-dark h3 {
+  color: var(--color-on-dark-text);
+}
+
+@media (max-width: 640px) {
+  h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   6. Buttons
+   --------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  line-height: 1;
+  border: 1px solid transparent;
+  transition: transform var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.btn-primary:hover {
+  background: #2e2e34;
+  box-shadow: var(--shadow-card-hover);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-border-hairline-strong);
+}
+
+.btn-ghost:hover {
+  background: rgba(23, 20, 35, 0.04);
+}
+
+.btn-small {
+  padding: 0.6rem 1.1rem;
+  font-size: var(--font-size-sm);
+}
+
+/* ---------------------------------------------------------------------
+   7. Header
+   --------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  background: rgba(251, 250, 247, 0.9);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--color-border-hairline);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Real LuciThinx logo (transparent PNG) in the header. */
+.brand-logo {
+  display: block;
+  height: 44px;
+  width: auto;
+}
+
+/* Pastel soundwave asset used as a small footer mark. */
+.brand-mark-img {
+  display: block;
+  width: 62px;
+  height: auto;
+}
+
+.brand-word {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--color-ink);
+}
+
+/* "Luci" in the brand's cyan; "Thinx" inherits the ink (or paper in footer). */
+.brand-luci {
+  color: var(--color-brand-cyan);
+}
+
+.brand-word-footer {
+  color: var(--color-paper);
+}
+
+.main-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-list {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.nav-list a {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--easing-standard);
+}
+
+.nav-list a:hover {
+  color: var(--color-ink);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.nav-toggle {
+  display: none;
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+}
+
+.nav-toggle-icon,
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-ink);
+  border-radius: 2px;
+  position: relative;
+  transition: transform var(--duration-fast) var(--easing-standard);
+}
+
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle-icon::before {
+  top: -6px;
+}
+
+.nav-toggle-icon::after {
+  top: 6px;
+}
+
+/* ---------------------------------------------------------------------
+   8. Language switcher
+   --------------------------------------------------------------------- */
+.lang-switch {
+  display: inline-flex;
+  padding: 3px;
+  background: var(--color-paper-dim);
+  border: 1px solid var(--color-border-hairline);
+  border-radius: var(--radius-pill);
+}
+
+.lang-switch-footer {
+  background: rgba(251, 250, 247, 0.08);
+  border-color: var(--color-on-dark-border);
+}
+
+.lang-btn {
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+  transition: background-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard);
+}
+
+.lang-switch-footer .lang-btn {
+  color: var(--color-on-dark-muted);
+}
+
+.lang-btn[aria-pressed="true"] {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.lang-switch-footer .lang-btn[aria-pressed="true"] {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* ---------------------------------------------------------------------
+   9. Hero
+   --------------------------------------------------------------------- */
+.hero {
+  padding-block: var(--space-7) var(--space-8);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.hero-copy h1 {
+  margin-bottom: var(--space-3);
+}
+
+.hero-sub {
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  max-width: 46ch;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.hero-note {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.wave-art {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   10. Cards
+   --------------------------------------------------------------------- */
+/*
+ * Shared card geometry. The selector list below is the single source of
+ * truth for the padding/surface/border/radius used by every card-like
+ * block on the page (problem cards, capability cards, control cards,
+ * steps). `.card` and `.capability-card` additionally opt into the shadow +
+ * hover lift below; `.step` (see §11) uses the flat surface only,
+ * unchanged from before. Combine in HTML, e.g. `class="card
+ * capability-card"` — see AHA/Metz: wait for the 3rd repetition, this is
+ * the 3rd, so it's earned.
+ */
+.card,
+.capability-card,
+.step {
+  padding: var(--space-4);
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border-hairline);
+  border-radius: var(--radius-md);
+}
+
+.card,
+.capability-card {
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--duration-base) var(--easing-standard),
+    transform var(--duration-base) var(--easing-standard);
+}
+
+.card:hover,
+.capability-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.card p,
+.capability-card p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.card-on-dark {
+  background: var(--color-on-dark-surface);
+  border-color: var(--color-on-dark-border);
+}
+
+.card-on-dark p {
+  color: var(--color-on-dark-muted);
+}
+
+.capability-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: var(--space-3);
+  background: var(--color-paper-dim);
+  border-radius: var(--radius-sm);
+}
+
+/* ---------------------------------------------------------------------
+   11. How-it-works steps
+   --------------------------------------------------------------------- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  counter-reset: step;
+}
+
+.step-index {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  background: var(--gradient-signature);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.step p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+@media (max-width: 960px) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   12. Control section layout
+   --------------------------------------------------------------------- */
+.control-inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.4fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .control-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   13. Accordion (FAQ)
+   --------------------------------------------------------------------- */
+.accordion-item {
+  border-bottom: 1px solid var(--color-border-hairline);
+}
+
+.accordion-header {
+  margin: 0;
+}
+
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-4) 0;
+  text-align: left;
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.accordion-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-left: var(--space-3);
+}
+
+.accordion-icon::before,
+.accordion-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--color-primary);
+  transform: translate(-50%, -50%);
+  transition: transform var(--duration-base) var(--easing-standard);
+}
+
+.accordion-icon::before {
+  width: 14px;
+  height: 2px;
+}
+
+.accordion-icon::after {
+  width: 2px;
+  height: 14px;
+}
+
+.accordion-trigger[aria-expanded="true"] .accordion-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg) scaleY(0);
+}
+
+.accordion-panel {
+  padding-bottom: var(--space-4);
+  color: var(--color-text-muted);
+  max-width: 65ch;
+}
+
+/* ---------------------------------------------------------------------
+   14. Pilot form
+   --------------------------------------------------------------------- */
+.pilot-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border-hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.form-row-full {
+  grid-column: 1 / -1;
+}
+
+.form-row label {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  padding: 0.75rem 0.9rem;
+  background: var(--color-paper);
+  border: 1px solid var(--color-border-hairline-strong);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--duration-fast) var(--easing-standard);
+}
+
+.form-row input:focus-visible,
+.form-row select:focus-visible,
+.form-row textarea:focus-visible {
+  border-color: var(--color-primary);
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.form-status {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  min-height: 1.2em;
+}
+
+.form-status.is-error {
+  color: var(--color-signal-dark);
+}
+
+@media (max-width: 640px) {
+  .pilot-form {
+    grid-template-columns: 1fr;
+    padding: var(--space-4);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   15. Footer
+   --------------------------------------------------------------------- */
+.site-footer {
+  background: var(--color-ink);
+  color: var(--color-on-dark-muted);
+  padding-block: var(--space-6);
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.footer-tag {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  max-width: 32ch;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.footer-nav a {
+  font-size: var(--font-size-sm);
+  color: var(--color-on-dark-muted);
+  transition: color var(--duration-fast) var(--easing-standard);
+}
+
+.footer-nav a:hover {
+  color: var(--color-on-dark-text);
+}
+
+.footer-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.footer-copyright {
+  font-size: var(--font-size-sm);
+}
+
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   16. Mobile navigation
+   Collapse to the hamburger at <=1024px: below this the full inline nav
+   (5 items + lang switch + CTA) gets cramped and wraps mid-word.
+   --------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  /* Keep the nav — and its hamburger button — in the header row. Only the
+     dropdown list is lifted out of flow. Previously .main-nav itself was
+     position:absolute, which dragged the toggle below the header on mobile. */
+  .main-nav {
+    flex: 0 0 auto;
+    margin-left: auto;
+    position: static;
+  }
+
+  .nav-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-3) var(--shell-padding-inline);
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-border-hairline);
+    box-shadow: 0 12px 24px rgba(23, 20, 35, 0.08);
+  }
+
+  .nav-list.is-open {
+    display: flex;
+  }
+
+  .nav-list li {
+    padding-block: var(--space-2);
+    border-bottom: 1px solid var(--color-border-hairline);
+  }
+
+  .nav-list li:last-child {
+    border-bottom: 0;
+  }
+
+  .header-actions .btn-small {
+    display: none;
+  }
+
+  /* Müşteri girişi mobilde de görünür kalır; pilot CTA'sı menüde zaten var */
+  .header-actions .btn-login {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions .lang-switch {
+    transform: scale(0.92);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   17. Hero figure — editorial, static. A quiet hairline schematic
+   (voice call → structured record) drawn in ink on a paper-dim card.
+   No gradient, no glow, no animation.
+   --------------------------------------------------------------------- */
+.hero-figure .stroke {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hero-figure .stroke-soft {
+  stroke: var(--color-border-hairline-strong);
+}
+
+.hero-figure .fill-ink { fill: var(--color-ink); }
+.hero-figure .fill-soft { fill: var(--color-border-hairline-strong); }
+.hero-figure .fill-accent { fill: var(--color-accent); }
+
+/* ── Legal pages (aydinlatma) ───────────────────────────────────────── */
+.legal h2 {
+  font-size: var(--font-size-lg);
+  margin: var(--space-5) 0 var(--space-2);
+}
+.legal p,
+.legal ul {
+  color: var(--color-text-body);
+  margin: 0 0 var(--space-3);
+}
+.legal ul {
+  padding-left: var(--space-4);
+}
+.legal li + li {
+  margin-top: var(--space-1);
+}
+.legal .legal-updated {
+  margin-top: var(--space-5);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
